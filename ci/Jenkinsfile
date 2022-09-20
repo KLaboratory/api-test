@@ -14,8 +14,10 @@ pipeline {
 
   stages {
     stage('install') {
-      sh 'ls -la'
-      sh 'npm install'
+      steps {
+        sh 'ls -la'
+        sh 'npm install'
+      }
     }
     
     stage('build') {
