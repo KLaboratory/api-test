@@ -1,0 +1,37 @@
+pipeline {
+  agent any
+
+  tools {
+    nodejs "node"
+  }
+
+  parameters {
+    string name: 'container_name', defaultValue: 'api-test', description: 'Nombre del contenedor de docker' 
+    string name: 'image_name', defaultValue: 'api-test-image', description: 'Nombre de la imagen' 
+    string name: 'tag_image', defaultValue: '1.0.0', description: 'Tag de la imagen' 
+    string name: 'container_por', defaultValue: '80', description: 'Puerto de la imagen' 
+  }
+
+  stages {
+    stage('install') {
+      git branch: 'develop', url: 'https://github.com/KLaboratory/api-test.git'
+      sh 'npm install'
+    }
+    
+    stage('build') {
+      steps {
+        script {
+          try {
+            sh 'docker rmi $image_name:tag_image'
+          } catch (Exception e) {
+            echo 'Exception occurred: ' + e.toString()
+          }
+        }
+        sh 'npm run build'
+        sh 'docker build -t $image_name:$tag_name .'
+      } 
+    }
+  }
+
+
+}

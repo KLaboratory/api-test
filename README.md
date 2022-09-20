@@ -1,0 +1,1 @@
+jmeter -n -f -t ./test_plan.jmx -l ./results.jtl -j ./test.log -e -o ./test1
