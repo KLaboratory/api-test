@@ -14,7 +14,7 @@ pipeline {
 
   stages {
     stage('install') {
-      git branch: 'develop', url: 'https://github.com/KLaboratory/api-test.git'
+      sh 'ls -la'
       sh 'npm install'
     }
     
