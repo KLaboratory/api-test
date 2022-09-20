@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN cpm ci
+RUN npm ci
 
 COPY . .
 
@@ -20,7 +20,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN cpm ci --only=production
+RUN npm ci --only=production
 
 
 
